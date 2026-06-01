@@ -12,14 +12,16 @@ import javafx.scene.layout.*;
 
 public class CustomerDashboardController {
     private final RoomService roomSvc = new RoomService();
-    private String loggedInUsername = "User";
+    protected static String loggedInUsername = "User";
 
-    public void setUsername(String username) {this.loggedInUsername = username;}
+    public static void setUsername(String username) {
+        loggedInUsername = username;
+    }
 
     public Pane createScene() {
         BorderPane root = new BorderPane();
         root.setBackground(UIStyle.gradientBackground());
-        root.setLeft(UILayout.customerSidebar("kamar"));
+        root.setLeft(UILayout.customerSidebar("kamar", loggedInUsername));
 
         VBox containerLayout = new VBox(10);
         containerLayout.setPadding(new Insets(0, 40, 40, 40));
@@ -28,7 +30,7 @@ public class CustomerDashboardController {
         VBox.setVgrow(containerLayout, Priority.ALWAYS);
 
         containerLayout.getChildren().add(
-            UILayout.contentHeader("PILIH KAMAR", loggedInUsername, 200));
+            UILayout.contentHeader("PILIH KAMAR", loggedInUsername, 1000));
 
         VBox scrollableContent = new VBox(10);
         scrollableContent.setPadding(new Insets(0, 10, 0, 0));
