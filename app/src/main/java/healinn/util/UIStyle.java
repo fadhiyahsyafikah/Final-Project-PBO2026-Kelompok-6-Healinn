@@ -20,7 +20,7 @@ public class UIStyle {
     public static final String TEXT_LIGHT = "#f0ebe1";
     public static final String TEXT_DARK = "#2b1a0e";
     public static final String TEXT_MUTED = "#6b5a4e";
-    public static final String AVAILABLE = "#4caf50";
+    public static final String AVAILABLE = "#0a757d";
     public static final String OCCUPIED = "#e53935";
     public static final String BTN_OUTLINE = "#2b1a0e";
 
@@ -39,7 +39,6 @@ public class UIStyle {
             Color.web(CARD_DARK), CornerRadii.EMPTY, Insets.EMPTY));
     }
 
-    //Helper Hover
     public static void applyHoverEffect(Button btn, String hoverStyle, String normalStyle) {
         btn.setOnMouseEntered(e -> btn.setStyle(hoverStyle));
         btn.setOnMouseExited(e -> btn.setStyle(normalStyle));
