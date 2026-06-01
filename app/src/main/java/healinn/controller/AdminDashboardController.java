@@ -15,8 +15,8 @@ import javafx.scene.layout.Priority;
 import java.util.List;
 
 public class AdminDashboardController {
-    private final RoomService        roomSvc  = new RoomService();
-    private final ReservationService resSvc   = new ReservationService();
+    private final RoomService roomSvc = new RoomService();
+    private final ReservationService resSvc = new ReservationService();
 
     public Pane createStatusScene() {
         BorderPane root = new BorderPane();
@@ -54,7 +54,7 @@ public class AdminDashboardController {
             }
         }
 
-        HBox legend = new HBox(20,
+        HBox legend = new HBox(20, 
             UIComponent.lightLabel("■ Tersedia (Hijau)", 13),
             UIComponent.lightLabel("■ Terisi (Merah)", 13));
         legend.setPadding(new Insets(16, 0, 0, 0));

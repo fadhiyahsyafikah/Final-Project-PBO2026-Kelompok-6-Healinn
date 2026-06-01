@@ -11,20 +11,20 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
 public class UIStyle {
-    // ── Palet warna ──
-    public static final String BG_LIGHT    = "#c4cdb8";
-    public static final String BG_DARK     = "#8fa887";
-    public static final String CARD_DARK   = "#1e0f05";
-    public static final String CARD_MED    = "#2b1a0e";
-    public static final String GOLD        = "#c9a84c";
-    public static final String TEXT_LIGHT  = "#f0ebe1";
-    public static final String TEXT_DARK   = "#2b1a0e";
-    public static final String TEXT_MUTED  = "#6b5a4e";
-    public static final String AVAILABLE   = "#4caf50";
-    public static final String OCCUPIED    = "#e53935";
+    //Palet warna
+    public static final String BG_LIGHT = "#c4cdb8";
+    public static final String BG_DARK = "#8fa887";
+    public static final String CARD_DARK = "#1e0f05";
+    public static final String CARD_MED = "#2b1a0e";
+    public static final String GOLD = "#c9a84c";
+    public static final String TEXT_LIGHT = "#f0ebe1";
+    public static final String TEXT_DARK = "#2b1a0e";
+    public static final String TEXT_MUTED = "#6b5a4e";
+    public static final String AVAILABLE = "#4caf50";
+    public static final String OCCUPIED = "#e53935";
     public static final String BTN_OUTLINE = "#2b1a0e";
 
-    // ── Background ──
+    //Background
     public static Background gradientBackground() {
         LinearGradient lg = new LinearGradient(
             0, 0, 1, 1, true, CycleMethod.NO_CYCLE,

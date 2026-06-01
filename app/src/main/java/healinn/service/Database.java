@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-    
     // lokasi database(sqlite)
     private static final String URL = "jdbc:sqlite:healinn.db";
 
