@@ -89,7 +89,7 @@ Gradle akan otomatis mengunduh semua dependensi yang dibutuhkan dan menjalankan 
 ## 🏛️ Struktur Kode
 
 ```
-healinn-hotel/
+healinn/
 ├── build.gradle                    
 ├── settings.gradle
 ├── gradlew / gradlew.bat
