@@ -29,7 +29,7 @@ Aplikasi ini dibuat sebagai Proyek Akhir mata kuliah Pemrograman Berorientasi Ob
 🔑 ADMIN
 - 📊 Dashboard statistik: jumlah kamar terisi, tamu aktif, dan total pendapatan.
 - 🏨 Grid visual status 60 kamar (hijau = tersedia, merah = terisi).
-- 📋 Tabel seluruh transaksi reservasi dari semua customer dan opsi pembatalan reservasi.
+- 📋 Tabel seluruh transaksi reservasi dari semua customer dan opsi pembatalan reservasi aktif.
 
 ## 🔄 Alur Kerja Aplikasi
 
