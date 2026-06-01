@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class CustomerLoginController {
-
     private final AccService accService = new AccService();
 
     public Pane createScene() {
@@ -35,7 +34,7 @@ public class CustomerLoginController {
         HBox tabBar = new HBox(0);
         tabBar.setMaxWidth(440);
 
-        Button tabLogin  = tabBtn("MASUK");
+        Button tabLogin = tabBtn("MASUK");
         Button tabSignup = tabBtn("DAFTAR");
         tabLogin.setPrefWidth(220);
         tabSignup.setPrefWidth(220);
@@ -74,12 +73,11 @@ public class CustomerLoginController {
         VBox form = new VBox(14);
         form.setMaxWidth(440);
 
-        TextField     tfUser = UIComponent.lightTextField("Username");
+        TextField tfUser = UIComponent.lightTextField("Username");
         PasswordField tfPass = new PasswordField();
         tfPass.setPromptText("Password");
         tfPass.setPrefWidth(440); tfPass.setPrefHeight(46);
-        tfPass.setStyle("-fx-background-color:white;-fx-border-color:#bbb;" +
-                        "-fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12 8 12;");
+        tfPass.setStyle("-fx-background-color:white;-fx-border-color:#bbb;" + "-fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12 8 12;");
 
         Label errLbl = new Label();
         errLbl.setStyle("-fx-text-fill:#e53935;-fx-font-size:12px;");
@@ -111,15 +109,14 @@ public class CustomerLoginController {
         VBox form = new VBox(14);
         form.setMaxWidth(440);
 
-        TextField     tfUser  = UIComponent.lightTextField("Username");
-        TextField     tfEmail = UIComponent.lightTextField("Email");
-        PasswordField tfPass  = new PasswordField();
+        TextField tfUser = UIComponent.lightTextField("Username");
+        TextField tfEmail = UIComponent.lightTextField("Email");
+        PasswordField tfPass = new PasswordField();
         tfPass.setPromptText("Password (min. 6 karakter)");
         tfPass.setPrefWidth(440); tfPass.setPrefHeight(46);
-        tfPass.setStyle("-fx-background-color:white;-fx-border-color:#bbb;" +
-                        "-fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12 8 12;");
+        tfPass.setStyle("-fx-background-color:white;-fx-border-color:#bbb;" + "-fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12 8 12;");
 
-        Label errLbl  = new Label();
+        Label errLbl = new Label();
         errLbl.setStyle("-fx-text-fill:#e53935;-fx-font-size:12px;");
         errLbl.setVisible(false);
         Label succLbl = new Label();

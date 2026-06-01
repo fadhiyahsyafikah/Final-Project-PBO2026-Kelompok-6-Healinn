@@ -20,7 +20,7 @@ public class ReservationService {
 
     public ReservationService() {
         this.connection = Database.getInstance().getConnection();
-        this.roomService  = new RoomService();
+        this.roomService = new RoomService();
         this.ballroomService = new BallroomService();
     }
 
@@ -51,9 +51,9 @@ public class ReservationService {
         Ballroom ballroom = ballroomService.getBallroom();
         if (!ballroom.isAvailable()) return null;
 
-        long      totalPrice = pkg.calculateTotal(days);
-        LocalDate endDate    = eventDate.plusDays(pkg.isPerDay() ? days : 1);
-        String    resId      = generateReservationId();
+        long totalPrice = pkg.calculateTotal(days);
+        LocalDate endDate = eventDate.plusDays(pkg.isPerDay() ? days : 1);
+        String resId = generateReservationId();
 
         boolean saved = insertReservation(
             resId, custUsername,
@@ -195,7 +195,7 @@ public class ReservationService {
                                     LocalDate checkIn, LocalDate checkOut,
                                     long price, String pkgName, String purpose, int guestCount) {
         Reservation.Type resType = Reservation.Type.valueOf(type);
-        BallroomPackage  pkg     = pkgName != null ? BallroomPackage.valueOf(pkgName) : null;
+        BallroomPackage pkg = pkgName != null ? BallroomPackage.valueOf(pkgName) : null;
         return new Reservation(resId, customer, resType,
             bookableId, bookableName, checkIn, checkOut, price, pkg, purpose, guestCount);
     }

@@ -14,7 +14,7 @@ public class CustomerDashboardController {
     private final RoomService roomSvc = new RoomService();
     private String loggedInUsername = "User";
 
-    public void setUsername(String username) { this.loggedInUsername = username; }
+    public void setUsername(String username) {this.loggedInUsername = username;}
 
     public Pane createScene() {
         BorderPane root = new BorderPane();
@@ -37,10 +37,8 @@ public class CustomerDashboardController {
 
         for (RoomType type : RoomType.values()) {
             for (BedType bed : BedType.values()) {
-                String label = type.getDisplayName() + " - " + bed.getDisplayName() +
-                               " (" + bed.getFormattedPrice(type) + ")";
-                scrollableContent.getChildren().add(
-                    createCategorySection(label, type, bed));
+                String label = type.getDisplayName() + " - " + bed.getDisplayName() + " (" + bed.getFormattedPrice(type) + ")";
+                scrollableContent.getChildren().add(createCategorySection(label, type, bed));
             }
         }
 
@@ -60,7 +58,7 @@ public class CustomerDashboardController {
         section.setPadding(new Insets(10, 0, 15, 0));
 
         Label lblTitle = UIComponent.sectionTitle(title);
-        FlowPane flow  = new FlowPane(15, 15);
+        FlowPane flow = new FlowPane(15, 15);
 
         for (Room r : roomSvc.getRoomsByTypeAndBed(type, bed)) {
             VBox card = UILayout.roomCard(

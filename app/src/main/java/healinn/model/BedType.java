@@ -18,9 +18,9 @@ public enum BedType {
 
     public long getPriceFor(RoomType roomType) {
         return switch (roomType) {
-            case STANDARD -> this == TWIN_BED ? 500_000  : 450_000;
-            case DELUXE   -> this == TWIN_BED ? 1_000_000 : 750_000;
-            case SUITE    -> this == TWIN_BED ? 1_200_000 : 1_000_000;
+            case STANDARD -> this == TWIN_BED ? 500_000 : 450_000;
+            case DELUXE -> this == TWIN_BED ? 1_000_000 : 750_000;
+            case SUITE -> this == TWIN_BED ? 1_200_000 : 1_000_000;
         };
     }
 

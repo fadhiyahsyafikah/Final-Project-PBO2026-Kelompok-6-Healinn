@@ -78,7 +78,7 @@ public class RoomService {
                 String id = rs.getString("room_id");
                 int number = rs.getInt   ("room_number");
                 RoomType type = RoomType.valueOf(rs.getString("room_type"));
-                BedType     bedType = BedType.valueOf(rs.getString("bed_type"));
+                BedType bedType = BedType.valueOf(rs.getString("bed_type"));
                 Room.Status status = Room.Status.valueOf(rs.getString("status"));
 
                 Room room = new Room(id, number, type, bedType);

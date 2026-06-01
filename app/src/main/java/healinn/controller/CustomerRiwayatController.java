@@ -14,11 +14,10 @@ import javafx.scene.layout.*;
 import java.util.List;
 
 public class CustomerRiwayatController {
-
     private final ReservationService resSvc = new ReservationService();
     private String loggedInUsername = "";
 
-    public void setUsername(String username) { this.loggedInUsername = username; }
+    public void setUsername(String username) {this.loggedInUsername = username;}
 
     public Pane createScene() {
         BorderPane root = new BorderPane();
@@ -27,8 +26,7 @@ public class CustomerRiwayatController {
 
         VBox mainContent = new VBox(20);
         mainContent.setPadding(new Insets(0, 40, 40, 40));
-        mainContent.getChildren().add(
-            UILayout.contentHeader("RIWAYAT RESERVASI", loggedInUsername, 1000));
+        mainContent.getChildren().add(UILayout.contentHeader("RIWAYAT RESERVASI", loggedInUsername, 1000));
 
         VBox historyList = new VBox(15);
         historyList.setPadding(new Insets(10, 10, 10, 0));
@@ -51,7 +49,7 @@ public class CustomerRiwayatController {
                 }
 
                 String statusText = switch (r.getStatus()) {
-                    case ACTIVE    -> "AKTIF";
+                    case ACTIVE -> "AKTIF";
                     case COMPLETED -> "SELESAI";
                     case CANCELLED -> "DIBATALKAN";
                 };
@@ -80,21 +78,20 @@ public class CustomerRiwayatController {
     }
 
     public VBox createHistoryCard(String titleText, String detailsText, String priceText,
-                                  String statusText, boolean allowCancel, Runnable onCancelAction) {
+        String statusText, boolean allowCancel, Runnable onCancelAction) {
         VBox card = new VBox(12);
         card.setPadding(new Insets(20));
-        card.setStyle("-fx-background-color:" + UIStyle.CARD_DARK +
-                      ";-fx-background-radius:15;");
+        card.setStyle("-fx-background-color:" + UIStyle.CARD_DARK + ";-fx-background-radius:15;");
 
         HBox rowTop = new HBox();
         rowTop.setAlignment(Pos.CENTER_LEFT);
 
-        Label title  = UIComponent.goldLabel(titleText, 16);
+        Label title = UIComponent.goldLabel(titleText, 16);
         Label status = new Label(statusText);
         String statusColor = switch (statusText) {
-            case "AKTIF"       -> "#2196f3";
-            case "DIBATALKAN"  -> "#e53935";
-            default            -> "#4caf50";
+            case "AKTIF" -> "#2196f3";
+            case "DIBATALKAN" -> "#e53935";
+            default -> "#4caf50";
         };
         status.setStyle("-fx-background-color:" + statusColor +
                         ";-fx-text-fill:white;-fx-padding:4 10 4 10;" +
@@ -130,8 +127,7 @@ public class CustomerRiwayatController {
 
             btnCancel.setOnAction(e -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Yakin ingin membatalkan pesanan ini?",
-                    ButtonType.YES, ButtonType.NO);
+                    "Yakin ingin membatalkan pesanan ini?", ButtonType.YES, ButtonType.NO);
                 alert.setTitle("Konfirmasi Pembatalan");
                 alert.setHeaderText(null);
                 alert.showAndWait().ifPresent(resp -> {

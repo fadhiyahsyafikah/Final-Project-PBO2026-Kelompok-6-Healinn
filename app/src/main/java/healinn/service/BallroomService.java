@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//ambil data ballroom, update status ballroom
 public class BallroomService {
     private static final String BALLROOM_ID = "BALLROOM-01";
     private final Connection connection;

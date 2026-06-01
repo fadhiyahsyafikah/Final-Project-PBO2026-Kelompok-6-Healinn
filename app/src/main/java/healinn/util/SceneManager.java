@@ -26,19 +26,19 @@ public class SceneManager {
 
     private String currentScene;
 
-    public static final String SCENE_WELCOME          = "welcome";
-    public static final String SCENE_CUSTOMER_AUTH    = "customer_auth";
-    public static final String SCENE_SIGNUP           = "signup";
-    public static final String SCENE_LOGIN            = "login";
-    public static final String SCENE_ADMIN_LOGIN      = "admin_login";
-    public static final String SCENE_DASHBOARD_PILIH  = "dashboard_pilih";
-    public static final String SCENE_DASHBOARD_BALL   = "dashboard_ballroom";
-    public static final String SCENE_DASHBOARD_HIST   = "dashboard_riwayat";
-    public static final String SCENE_PESAN_KAMAR      = "pesan_kamar";
-    public static final String SCENE_RESERVASI_BALL   = "reservasi_ballroom";
-    public static final String SCENE_ADMIN_STATUS     = "admin_status";
-    public static final String SCENE_ADMIN_RESERVASI  = "admin_reservasi";
-    public static final String SCENE_ADMIN_STATISTIK  = "admin_statistik";
+    public static final String SCENE_WELCOME = "welcome";
+    public static final String SCENE_CUSTOMER_AUTH = "customer_auth";
+    public static final String SCENE_SIGNUP = "signup";
+    public static final String SCENE_LOGIN = "login";
+    public static final String SCENE_ADMIN_LOGIN = "admin_login";
+    public static final String SCENE_DASHBOARD_PILIH = "dashboard_pilih";
+    public static final String SCENE_DASHBOARD_BALL = "dashboard_ballroom";
+    public static final String SCENE_DASHBOARD_HIST = "dashboard_riwayat";
+    public static final String SCENE_PESAN_KAMAR = "pesan_kamar";
+    public static final String SCENE_RESERVASI_BALL = "reservasi_ballroom";
+    public static final String SCENE_ADMIN_STATUS = "admin_status";
+    public static final String SCENE_ADMIN_RESERVASI = "admin_reservasi";
+    public static final String SCENE_ADMIN_STATISTIK = "admin_statistik";
 
     public void init(Stage stage) {
         this.primaryStage = stage;
@@ -103,7 +103,7 @@ public class SceneManager {
         return scene;
     }
 
-    public Stage getStage() { return primaryStage; }
+    public Stage getStage() {return primaryStage;}
 
-    public String getCurrentScene() { return currentScene; }
+    public String getCurrentScene() {return currentScene;}
 }
