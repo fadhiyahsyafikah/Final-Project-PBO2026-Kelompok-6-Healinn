@@ -139,7 +139,7 @@ healinn/
 | Encapsulation | Field bersifat `private`, akses melalui getter dan setter           |
 | Inheritance   | `Admin` dan `Customer` mewarisi abstract class `User`                           |
 | Abstraction   | `User` sebagai abstract class, `Bookable` sebagai interface                     |
-| Polymorphism  | `Room` & `Ballroom` implements `Bookable`, override `getRole()` pada subclass   |
+| Polymorphism  | `Room` & `Ballroom` implements `Bookable`, override `getName()` pada subclass   |
 
 ---
 
