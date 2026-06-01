@@ -29,7 +29,7 @@ Aplikasi ini dibuat sebagai Proyek Akhir mata kuliah Pemrograman Berorientasi Ob
 🔑 ADMIN
 - 📊 Dashboard statistik: jumlah kamar terisi, tamu aktif, dan total pendapatan.
 - 🏨 Grid visual status 60 kamar (hijau = tersedia, merah = terisi).
-- 📋 Tabel seluruh transaksi reservasi dari semua customer.
+- 📋 Tabel seluruh transaksi reservasi dari semua customer dan opsi pembatalan reservasi.
 
 ## 🔄 Alur Kerja Aplikasi
 
@@ -147,7 +147,7 @@ healinn-hotel/
 
 | Nama                     | Tugas Utama                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------|
-| Karis Kabangan           | Logika dan implementasi `model/` (User, Room, Reservation, dll.)                        |
+| Karis Kabanga           | Logika dan implementasi `model/` (User, Room, Reservation, dll.)                        |
 | Fadhiyah Syafikah Firman | Logika bisnis, database service + controller (Database, AccService, ReservationService, dll.) |
 | Zahra Intan Pratiwi      | Tampilan & alur `util/` + controller (SceneManager, UIComponent, semua halaman)         |
 
