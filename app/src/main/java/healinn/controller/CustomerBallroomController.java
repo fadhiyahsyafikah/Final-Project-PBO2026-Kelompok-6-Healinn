@@ -28,38 +28,41 @@ public class CustomerBallroomController {
         mainContent.getChildren().add(
             UILayout.contentHeader("RESERVASI BALLROOM", loggedInUsername, 1000));
 
-        // Status ballroom
-        boolean available = ballroomSvc.getBallroom().isAvailable();
-        Label statusLbl = new Label(available ? "● Tersedia untuk dipesan" : "● Sedang Dipesan");
-        statusLbl.setStyle("-fx-font-family:'Georgia';-fx-font-size:14px;-fx-text-fill:" +
-            (available ? UIStyle.AVAILABLE : UIStyle.OCCUPIED) + ";");
-        mainContent.getChildren().add(statusLbl);
-
         Label sectionTitle = UIComponent.sectionTitle("Grand Ballroom HealInn");
         mainContent.getChildren().add(sectionTitle);
-
+        
         FlowPane flow = new FlowPane(20, 20);
         flow.setAlignment(Pos.TOP_LEFT);
+        
+        boolean available = ballroomSvc.getBallroom().isAvailable();
 
         for (BallroomPackage pkg : BallroomPackage.values()) {
             VBox card = UILayout.ballroomCard(pkg.getDisplayName(), pkg.getFormatedPrice());
             Button resBtn = (Button) card.getChildren().stream()
-                .filter(n -> n instanceof Button).findFirst().orElse(null);
-
+            .filter(n -> n instanceof Button).findFirst().orElse(null);
+            
             if (resBtn != null) {
                 resBtn.setDisable(!available);
                 resBtn.setOnAction(e ->
                     new RoomBookingController(loggedInUsername, pkg).showDialog());
+                }
+                flow.getChildren().add(card);
             }
-            flow.getChildren().add(card);
-        }
+            
+            mainContent.getChildren().add(flow);
 
-        mainContent.getChildren().add(flow);
+            Label statusLbl = new Label(available ? "● Tersedia untuk dipesan" : "● Sedang Dipesan");
+            statusLbl.setStyle("-fx-font-family:'Georgia';-fx-font-size:14px;-fx-text-fill:" +
+                (available ? UIStyle.AVAILABLE : UIStyle.OCCUPIED) + ";");
+            
+            VBox.setMargin(statusLbl, new Insets(10, 0, 15, 0)); 
+            mainContent.getChildren().add(statusLbl);
+                
+            ScrollPane scroll = new ScrollPane(mainContent);
+            scroll.setFitToWidth(true);
+            scroll.setStyle("-fx-background:transparent;-fx-background-color:transparent;");
+            root.setCenter(scroll);
 
-        ScrollPane scroll = new ScrollPane(mainContent);
-        scroll.setFitToWidth(true);
-        scroll.setStyle("-fx-background:transparent;-fx-background-color:transparent;");
-        root.setCenter(scroll);
-        return root;
+            return root;
     }
 }

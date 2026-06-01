@@ -18,13 +18,9 @@ import java.time.temporal.ChronoUnit;
 
 public class RoomBookingController {
     private final ReservationService resSvc = new ReservationService();
-
-    // Mode Kamar
     private final Room room;
     private final CustomerDashboardController roomParent;
     private final String usernameKamar;
-
-    // Mode Ballroom
     private final BallroomPackage ballroomPkg;
     private final String usernameBallroom;
 
@@ -215,7 +211,6 @@ public class RoomBookingController {
             daysLabel.setVisible(isPerDay); daysLabel.setManaged(isPerDay);
             daysSpinner.setVisible(isPerDay); daysSpinner.setManaged(isPerDay);
 
-            // Estimasi total (auto-update jika paket per-hari)
             Label estimasiLbl = UIComponent.lightLabel(
                 "Total yang harus dibayar: " +
                 RoomType.formatRupiah(ballroomPkg.calculateTotal(1)), 14);
@@ -223,7 +218,7 @@ public class RoomBookingController {
                 estimasiLbl.setText("Total yang harus dibayar: " +
                     RoomType.formatRupiah(ballroomPkg.calculateTotal(nv))));
 
-            // Spinner jumlah tamu ballroom (maks. 500 orang)
+            // jumlah tamu ballroom (maksimal 500 orang)
             Spinner<Integer> spGuest = new Spinner<>(1, 500, 1);
             spGuest.setPrefWidth(440);
             spGuest.setEditable(true);
@@ -248,7 +243,6 @@ public class RoomBookingController {
                 "Tujuan Acara (Pernikahan, Seminar, dll)");
             tfPurpose.setPrefWidth(440);
 
-            // Input validasi pembayaran
             TextField tfPay = UIComponent.styledTextField(
                 "Masukkan nominal pembayaran (angka)");
             tfPay.setPrefWidth(440);
@@ -271,7 +265,6 @@ public class RoomBookingController {
                     return;
                 }
 
-                // validasi jumlah tamu
                 int guestCount;
                 try {guestCount = Integer.parseInt(spGuest.getEditor().getText().trim());
                     if (guestCount < 1 || guestCount > 500) {
@@ -288,7 +281,6 @@ public class RoomBookingController {
                     return;
                 }
 
-                // Validasi pembayaran
                 String payStr = tfPay.getText().trim().replaceAll("[^0-9]", "");
                 if (payStr.isBlank()) {
                     showErr(errLabel, "Masukkan nominal pembayaran.");
@@ -329,7 +321,6 @@ public class RoomBookingController {
         stage.show();
     }
 
-    // method tambahan
     private void addLabel(VBox root, String text) {
         Label lbl = new Label(text);
         lbl.setStyle("-fx-text-fill:" + UIStyle.TEXT_LIGHT +
