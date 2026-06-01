@@ -55,7 +55,6 @@ public class UILayout {
             card.setOnMouseExited(e -> card.setStyle(
                 "-fx-background-color: " + UIStyle.CARD_DARK + "; -fx-background-radius:12; -fx-cursor:hand;"));
         }
-
         return card;
     }
 
@@ -88,7 +87,7 @@ public class UILayout {
     }
 
     //Sidebar Customer
-    public static VBox customerSidebar(String activeMenu) {
+    public static VBox customerSidebar(String activeMenu, String username) {
         VBox sidebar = new VBox(16);
         sidebar.setPrefWidth(260);
         sidebar.setPrefHeight(720);
@@ -113,20 +112,35 @@ public class UILayout {
         SceneManager sm = SceneManager.getInstance();
         btnKamar.setOnAction(e -> sm.navigateTo(SceneManager.SCENE_DASHBOARD_PILIH));
         btnBall.setOnAction(e -> sm.navigateTo(SceneManager.SCENE_DASHBOARD_BALL));
-        btnRiwayat.setOnAction(e -> sm.navigateTo(SceneManager.SCENE_DASHBOARD_HIST));
+        btnRiwayat.setOnAction(e -> {
+            healinn.controller.CustomerRiwayatController hc = new healinn.controller.CustomerRiwayatController();
+            sm.getStage().getScene().setRoot(hc.createScene());
+        });
 
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
+        HBox userBox = new HBox(8);
+        userBox.setAlignment(Pos.CENTER);
+        userBox.setPadding(new Insets(0, 0, 10, 0)); // Jarak ke tombol log out
+        
+        Label userLbl = new Label(username);
+        userLbl.setFont(Font.font("Georgia", FontWeight.BOLD, 14));
+        userLbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
+        
+        Label userIcon = new Label("👤");
+        userIcon.setFont(Font.font(18));
+        userBox.getChildren().addAll(userIcon, userLbl);
+
         Button btnLogout = UIComponent.darkButton("LOG OUT", 180);
         btnLogout.setOnAction(e -> sm.navigateRoot(SceneManager.SCENE_WELCOME));
 
-        sidebar.getChildren().addAll(logoBox, sep, dashLbl, btnKamar, btnBall, btnRiwayat, spacer, btnLogout);
+        sidebar.getChildren().addAll(logoBox, sep, dashLbl, btnKamar, btnBall, btnRiwayat, spacer, userBox, btnLogout);
         return sidebar;
     }
 
     //Sidebar Admin
-    public static VBox adminSidebar(String activeMenu) {
+    public static VBox adminSidebar(String activeMenu, String username) {
         VBox sidebar = new VBox(16);
         sidebar.setPrefWidth(260);
         sidebar.setPrefHeight(720);
@@ -157,14 +171,26 @@ public class UILayout {
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
+        HBox userBox = new HBox(8);
+        userBox.setAlignment(Pos.CENTER);
+        userBox.setPadding(new Insets(0, 0, 10, 0));
+        
+        Label userLbl = new Label(username);
+        userLbl.setFont(Font.font("Georgia", FontWeight.BOLD, 14));
+        userLbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
+        
+        Label userIcon = new Label("👤");
+        userIcon.setFont(Font.font(18));
+        userBox.getChildren().addAll(userIcon, userLbl);
+
         Button btnLogout = UIComponent.darkButton("LOG OUT", 180);
         btnLogout.setOnAction(e -> sm.navigateRoot(SceneManager.SCENE_WELCOME));
 
-        sidebar.getChildren().addAll(logoBox, sep, dashLbl, btnStatus, btnReservasi, btnStatistik, spacer, btnLogout);
+        sidebar.getChildren().addAll(logoBox, sep, dashLbl, btnStatus, btnReservasi, btnStatistik, spacer, userBox, btnLogout);
         return sidebar;
     }
 
-    //Content Header Row
+    //Content Header 
     public static VBox contentHeader(String titleText, String username, double divWidth) {
         HBox topRow = new HBox();
         topRow.setAlignment(Pos.CENTER_LEFT);
@@ -173,16 +199,7 @@ public class UILayout {
         Label title = UIComponent.pageTitle(titleText);
         HBox.setHgrow(title, Priority.ALWAYS);
 
-        HBox userBox = new HBox(8);
-        userBox.setAlignment(Pos.CENTER_RIGHT);
-        Label userLbl = new Label(username);
-        userLbl.setFont(Font.font("Georgia", FontWeight.BOLD, 14));
-        userLbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
-        Label userIcon = new Label("👤");
-        userIcon.setFont(Font.font(22));
-        userBox.getChildren().addAll(userLbl, userIcon);
-
-        topRow.getChildren().addAll(title, userBox);
+        topRow.getChildren().addAll(title);
 
         Line div = UIComponent.dividerDark(divWidth);
         VBox header = new VBox(8, topRow, div);
@@ -190,39 +207,33 @@ public class UILayout {
         return header;
     }
 
-    //Logo Box
+    //Logo
     public static VBox buildLogoBox(boolean isDarkBackground, boolean showAdminPortal) {
-        VBox box = new VBox(2);
+        VBox box = new VBox(9);
         box.setAlignment(Pos.CENTER);
 
-        // Menentukan warna text berdasarkan warna background scene
         String logoColor = isDarkBackground ? UIStyle.TEXT_LIGHT : UIStyle.TEXT_DARK;
-        String subColor = isDarkBackground ? UIStyle.TEXT_MUTED : "#7A7A7A"; // Abu-abu gelap agar kontras di bg terang
 
         Label h1 = new Label("HEALINN");
         h1.setFont(Font.font("Georgia", FontWeight.BOLD, 22));
         h1.setTextFill(Color.web(logoColor));
 
-        Label h2 = new Label("HOTEL");
-        h2.setFont(Font.font("Georgia", FontWeight.BOLD, 22));
+        Label h2 = new Label("HOTEL & CONVENTION CENTER");
+        h2.setFont(Font.font("Georgia", FontWeight.BOLD, 13));
         h2.setTextFill(Color.web(logoColor));
 
-        Label sub = new Label("HOTEL & CONVENTION CENTER");
-        sub.setFont(Font.font("Georgia", FontWeight.NORMAL, 9));
-        sub.setTextFill(Color.web(subColor));
-
-        box.getChildren().addAll(h1, h2, sub);
+        box.getChildren().addAll(h1, h2);
 
         if (showAdminPortal) {
             Label adminPortal = new Label("ADMIN PORTAL");
             adminPortal.setFont(Font.font("Georgia", FontWeight.BOLD, 10));
-            adminPortal.setTextFill(Color.web(isDarkBackground ? UIStyle.TEXT_MUTED : UIStyle.TEXT_DARK));
+            adminPortal.setTextFill(Color.web(isDarkBackground ? UIStyle.TEXT_LIGHT : UIStyle.TEXT_MUTED));
             box.getChildren().add(adminPortal);
         }
         return box;
     }
 
-    //Form Panel Base
+    //Form Panel 
     public static VBox darkFormPanel() {
         VBox panel = new VBox(18);
         panel.setPrefWidth(760);

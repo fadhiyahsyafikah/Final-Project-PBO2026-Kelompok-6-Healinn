@@ -50,7 +50,7 @@ public class AdminLoginController {
         btnLogin.setOnAction(e -> {
             User user = accService.login(tfUser.getText().trim(), tfPass.getText());
             if (user == null || !user.getRole().equals("ADMIN")) {
-                errLbl.setText("Kredensial admin tidak valid.");
+                errLbl.setText("Admin tidak valid.");
                 errLbl.setVisible(true);
             } else {
                 errLbl.setVisible(false);

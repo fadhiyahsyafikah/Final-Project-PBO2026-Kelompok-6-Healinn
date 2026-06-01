@@ -96,6 +96,7 @@ public class CustomerLoginController {
             } else {
                 errLbl.setVisible(false);
                 SceneManager sm = SceneManager.getInstance();
+                CustomerDashboardController.setUsername(user.getUsername());
                 sm.navigateRoot(SceneManager.SCENE_DASHBOARD_PILIH);
             }
         });
