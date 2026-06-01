@@ -32,7 +32,7 @@ public class RoomBookingController {
     public RoomBookingController(User user, Room r, CustomerDashboardController parent) {
         this.room = r;
         this.roomParent = parent;
-        this.usernameKamar = (user != null) ? user.getUsername() : "";
+        this.usernameKamar = CustomerDashboardController.loggedInUsername;
         this.ballroomPkg = null;
         this.usernameBallroom = null;
     }
@@ -40,7 +40,7 @@ public class RoomBookingController {
     // pesan ballroom
     public RoomBookingController(String username, BallroomPackage pkg) {
         this.ballroomPkg = pkg;
-        this.usernameBallroom = username;
+        this.usernameBallroom = CustomerDashboardController.loggedInUsername;
         this.room = null;
         this.roomParent = null;
         this.usernameKamar = null;

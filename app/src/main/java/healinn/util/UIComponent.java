@@ -32,6 +32,7 @@ public class UIComponent {
         Label lbl = new Label(text);
         lbl.setFont(Font.font("Georgia", FontWeight.BOLD, 36));
         lbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
+        lbl.setStyle("-fx-text-fill: #3d2510 !important;");
         return lbl;
     }
 

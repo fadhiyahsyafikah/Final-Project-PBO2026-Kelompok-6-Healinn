@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-//data yg di set: data admin, data rooms (30 kamar), data ballroom
+//data yg di set: data admin, data rooms (60 kamar), data ballroom
 // Bertanggung jawab mengisi data awal ke database saat pertama kali aplikasi dijalankan.
 
 public class DatabaseSeeder {
@@ -112,7 +112,7 @@ public class DatabaseSeeder {
                 ps.addBatch();
             }
             ps.executeBatch();
-            System.out.println("DATASEED: 30 Rooms berhasil dibuat.");
+            System.out.println("DATASEED: 60 Rooms berhasil dibuat.");
         } catch (SQLException e) {
             System.err.println("DATASEED: Gagal seed rooms: " + e.getMessage());
         }

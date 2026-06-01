@@ -54,7 +54,7 @@ public class Database {
                 )
             """);
 
-            //tabel rooms(30 kamar, standar, deluxe, suite)
+            //tabel rooms(60 kamar, standar, deluxe, suite)
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS rooms (
                     room_id     TEXT PRIMARY KEY,

@@ -15,14 +15,15 @@ import java.util.List;
 
 public class CustomerRiwayatController {
     private final ReservationService resSvc = new ReservationService();
-    private String loggedInUsername = "";
+    private String loggedInUsername = CustomerDashboardController.loggedInUsername;
 
     public void setUsername(String username) {this.loggedInUsername = username;}
 
     public Pane createScene() {
+        loggedInUsername = CustomerDashboardController.loggedInUsername;
         BorderPane root = new BorderPane();
         root.setBackground(UIStyle.gradientBackground());
-        root.setLeft(UILayout.customerSidebar("riwayat"));
+        root.setLeft(UILayout.customerSidebar("riwayat", loggedInUsername));
 
         VBox mainContent = new VBox(20);
         mainContent.setPadding(new Insets(0, 40, 40, 40));
