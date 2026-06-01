@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 
 public class LoginSelectController {
     public Pane createScene(){
-        VBox root = new VBox(25);
+        VBox root = new VBox(15);
         root.setAlignment(Pos.CENTER);
         root.setBackground(UIStyle.gradientBackground());
 

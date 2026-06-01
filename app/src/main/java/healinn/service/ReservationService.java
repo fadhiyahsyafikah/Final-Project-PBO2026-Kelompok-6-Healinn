@@ -20,12 +20,12 @@ public class ReservationService {
 
     public ReservationService() {
         this.connection = Database.getInstance().getConnection();
-        this.roomService  = new RoomService();
+        this.roomService = new RoomService();
         this.ballroomService = new BallroomService();
     }
 
     //booking kamar
-    public Reservation bookRoom(String custUsername, String roomId, LocalDate checkIn, LocalDate checkOut){
+    public Reservation bookRoom(String custUsername, String roomId, LocalDate checkIn, LocalDate checkOut, int guestCount) {
         if (!checkOut.isAfter(checkIn)) return null;
 
         Room room = roomService.findById(roomId);
@@ -37,37 +37,35 @@ public class ReservationService {
         boolean saved = insertReservation(
             resId, custUsername,
             "ROOM", roomId, room.getName(),
-            checkIn, checkOut, price, null, null);   //purpose null krn kamar     
+            checkIn, checkOut, price, null, null, guestCount);   //purpose null krn kamar     
         if (!saved) return null;
 
         roomService.updateStatus(roomId, Room.Status.OCCUPIED);
 
         return buildObject(resId, custUsername, "ROOM",
-            roomId, room.getName(), checkIn, checkOut, price, null, null);
+            roomId, room.getName(), checkIn, checkOut, price, null, null, guestCount);
     }
 
     //booking ballroom
-    public Reservation bookBallroom(String custUsername, BallroomPackage pkg, LocalDate eventDate, int days, String purpose) {
+    public Reservation bookBallroom(String custUsername, BallroomPackage pkg, LocalDate eventDate, int days, String purpose, int guestCount) {
         Ballroom ballroom = ballroomService.getBallroom();
         if (!ballroom.isAvailable()) return null;
 
-        long      totalPrice = pkg.calculateTotal(days);
-        LocalDate endDate    = eventDate.plusDays(pkg.isPerDay() ? days : 1);
-        String    resId      = generateReservationId();
+        long totalPrice = pkg.calculateTotal(days);
+        LocalDate endDate = eventDate.plusDays(pkg.isPerDay() ? days : 1);
+        String resId = generateReservationId();
 
         boolean saved = insertReservation(
             resId, custUsername,
             "BALLROOM", "BALLROOM-01", "Grand Ballroom Healinn",
-            eventDate, endDate, totalPrice, pkg.name(), purpose); //purpose untuk ballroom (wisuda atau nikahan dkk)
+            eventDate, endDate, totalPrice, pkg.name(), purpose, guestCount);
+
         if (!saved) return null;
-
         ballroomService.updateStatus(Ballroom.Status.BOOKED);
-
         return buildObject(resId, custUsername, "BALLROOM",
-            "BALLROOM-01", "Grand Ballroom Healinn",
-            eventDate, endDate, totalPrice, pkg.name(), purpose);
+        "BALLROOM-01", "Grand Ballroom Healinn",
+        eventDate, endDate, totalPrice, pkg.name(), purpose, guestCount);
     }
-
 
     //cancel
     public boolean cancelReservation(String reservationId) {
@@ -101,9 +99,9 @@ public class ReservationService {
         return query("SELECT * FROM reservations ORDER BY reservation_id DESC"); //admin
     }
 
-    //statistik, jumlah cust yg ada dan penapatan kotor, ini untuk admin
+    //statistik, jumlah cust yg ada dan pendapatan kotor, ini untuk admin
     public int countActiveGuests() {
-        String sql = "SELECT COUNT(*) FROM reservations WHERE type='ROOM' AND status='ACTIVE'";
+        String sql = "SELECT COALESCE(SUM(guest_count), 0) FROM reservations " + "WHERE type='ROOM' AND status='ACTIVE'";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             return rs.next() ? rs.getInt(1) : 0;
@@ -125,16 +123,16 @@ public class ReservationService {
         return nights * bedType.getPriceFor(type);
     }
 
-    //method tambahan
+// method tambahan untuk insert data ke database
     private boolean insertReservation(String resId, String customer, String type, 
                                       String bookableId, String bookableName, 
                                       LocalDate checkIn, LocalDate checkOut,
-                                      long price, String ballroompkg, String purpose){
+                                      long price, String ballroompkg, String purpose, int guestCount){
         String sql = """
             INSERT INTO reservations
             (reservation_id, customer_username, type, bookable_id, bookable_name,
-             check_in, check_out, total_price, ballroom_pkg, purpose, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE')
+             check_in, check_out, total_price, ballroom_pkg, purpose, guest_count, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE')
         """;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, resId);
@@ -146,7 +144,9 @@ public class ReservationService {
             ps.setString(7, checkOut.toString());
             ps.setLong(8, price);
             ps.setString(9, ballroompkg);
-            ps.setString(10, purpose);
+            ps.setString(10, purpose);    
+            ps.setInt(11, guestCount);    
+            
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -178,7 +178,8 @@ public class ReservationService {
                     LocalDate.parse(rs.getString("check_out")),
                     rs.getLong("total_price"),
                     rs.getString("ballroom_pkg"),
-                    rs.getString("purpose")
+                    rs.getString("purpose"),
+                    rs.getInt("guest_count")
                 );
                 r.setStatus(Reservation.Status.valueOf(rs.getString("status")));
                 list.add(r);
@@ -192,11 +193,11 @@ public class ReservationService {
     private Reservation buildObject(String resId, String customer, String type,
                                     String bookableId, String bookableName,
                                     LocalDate checkIn, LocalDate checkOut,
-                                    long price, String pkgName, String purpose) {
+                                    long price, String pkgName, String purpose, int guestCount) {
         Reservation.Type resType = Reservation.Type.valueOf(type);
-        BallroomPackage  pkg     = pkgName != null ? BallroomPackage.valueOf(pkgName) : null;
+        BallroomPackage pkg = pkgName != null ? BallroomPackage.valueOf(pkgName) : null;
         return new Reservation(resId, customer, resType,
-            bookableId, bookableName, checkIn, checkOut, price, pkg, purpose);
+            bookableId, bookableName, checkIn, checkOut, price, pkg, purpose, guestCount);
     }
 
     private String generateReservationId() {

@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class AdminLoginController {
-
     private final AccService accService = new AccService();
 
     public Pane createScene() {
@@ -32,7 +31,7 @@ public class AdminLoginController {
 
         VBox logo = UILayout.buildLogoBox(true, true);
 
-        TextField     tfUser = UIComponent.styledTextField("Username Admin");
+        TextField tfUser = UIComponent.styledTextField("Username Admin");
         PasswordField tfPass = new PasswordField();
         tfPass.setPromptText("Password");
         tfPass.setPrefWidth(400); tfPass.setPrefHeight(50);
@@ -51,7 +50,7 @@ public class AdminLoginController {
         btnLogin.setOnAction(e -> {
             User user = accService.login(tfUser.getText().trim(), tfPass.getText());
             if (user == null || !user.getRole().equals("ADMIN")) {
-                errLbl.setText("Kredensial admin tidak valid.");
+                errLbl.setText("Admin tidak valid.");
                 errLbl.setVisible(true);
             } else {
                 errLbl.setVisible(false);

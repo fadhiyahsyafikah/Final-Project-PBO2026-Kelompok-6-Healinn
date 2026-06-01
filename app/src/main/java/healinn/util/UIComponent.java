@@ -32,12 +32,13 @@ public class UIComponent {
         Label lbl = new Label(text);
         lbl.setFont(Font.font("Georgia", FontWeight.BOLD, 36));
         lbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
+        lbl.setStyle("-fx-text-fill: #3d2510 !important;");
         return lbl;
     }
 
     public static Label sectionTitle(String text) {
         Label lbl = new Label(text);
-        lbl.setFont(Font.font("Georgia", FontWeight.NORMAL, 20));
+        lbl.setFont(Font.font("Georgia", FontWeight.NORMAL, 25));
         lbl.setTextFill(Color.web(UIStyle.TEXT_DARK));
         return lbl;
     }
@@ -183,7 +184,7 @@ public class UIComponent {
         return btn;
     }
 
-    //Input Field
+    //Inputan
     public static TextField styledTextField(String prompt) {
         TextField tf = new TextField();
         tf.setPromptText(prompt);

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-    
     // lokasi database(sqlite)
     private static final String URL = "jdbc:sqlite:healinn.db";
 
@@ -55,7 +54,7 @@ public class Database {
                 )
             """);
 
-            //tabel rooms(30 kamar, standar, deluxe, suite)
+            //tabel rooms(60 kamar, standar, deluxe, suite)
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS rooms (
                     room_id     TEXT PRIMARY KEY,
@@ -87,6 +86,7 @@ public class Database {
                     total_price       INTEGER NOT NULL,
                     ballroom_pkg      TEXT,            -- null jika tipe ROOM
                     purpose           TEXT,            -- tujuan penggunaan ballroom, null jika tipe ROOM
+                    guest_count       INTEGER NOT NULL DEFAULT 1,
                     status            TEXT NOT NULL    -- 'ACTIVE', 'COMPLETED', 'CANCELLED'
                 )
             """);
